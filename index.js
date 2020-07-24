@@ -20,7 +20,8 @@ fastify.addHook("onRequest", (req, _reply, done) => {
 fastify.register(require("point-of-view"), {
   engine: {
     ejs: require("ejs")
-  }
+  },
+  root: path.join(__dirname, "views")
 });
 
 fastify.register(require("fastify-static"), {
@@ -35,7 +36,7 @@ fastify.get("/", async (_req, reply) => {
     formattedDate: moment.unix(f.date).fromNow(),
     onClick: `download("${f.link}")`
   }));
-  reply.view("/index.ejs", { feed, delugeAddress });
+  reply.view("index.ejs", { feed, delugeAddress });
 });
 
 fastify.get("/api/feed", async () => {
