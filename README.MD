@@ -2,6 +2,8 @@
 
 Quickly add torrents to Deluge.
 
+[<img src="./art/demo.gif" />](./art/demo.gif)
+
 ## Usage
 
 Create a `.env` file based on `.env.sample`
