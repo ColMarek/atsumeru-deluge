@@ -1,7 +1,8 @@
 require("dotenv").config();
 const fastify = require("fastify")();
 const path = require("path");
-const moment = require("moment");
+const dayjs = require("dayjs");
+dayjs.extend(require("dayjs/plugin/relativeTime"));
 const axios = require("axios").default;
 
 const port = process.env.PORT || 3000;
@@ -33,7 +34,7 @@ fastify.get("/", async (_req, reply) => {
   let feed = await atsumeruCore.getFeedWithDetail();
   feed = feed.map(f => ({
     ...f,
-    formattedDate: moment.unix(f.date).fromNow(),
+    formattedDate: dayjs.unix(f.date).fromNow(),
     onClick: `download("${f.link}")`
   }));
   reply.view("index.ejs", { feed, delugeAddress });
