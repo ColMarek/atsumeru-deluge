@@ -4,6 +4,8 @@ const path = require("path");
 const dayjs = require("dayjs");
 dayjs.extend(require("dayjs/plugin/relativeTime"));
 const axios = require("axios").default;
+const fs = require("fs");
+const parseTorrent = require("parse-torrent");
 
 const port = process.env.PORT || 3000;
 const delugePassword = process.env.DELUGE_PASSWORD;
@@ -46,7 +48,8 @@ fastify.get("/api/feed", async () => {
 });
 
 fastify.post("/api/torrent", async request => {
-  const magnet = JSON.parse(request.body).magnet;
+  const link = JSON.parse(request.body).link;
+  const magnet = await getTorrentMagnet(link);
 
   const res = await axios.post(
     delugeAddress,
@@ -117,4 +120,22 @@ async function getCookie() {
   );
 
   cookie = res.headers["set-cookie"][0];
+}
+
+async function getTorrentMagnet(link) {
+  console.log(`Fetching torrent file '${link}'`);
+  const response = await axios({ method: "GET", url: link, responseType: "stream" });
+
+  return new Promise(resolve => {
+    const tempTorrentPath = "./temp.torrent";
+    console.log(`Saving temporary torrent to ${tempTorrentPath}`);
+    const stream = response.data.pipe(fs.createWriteStream(tempTorrentPath));
+    stream.on("finish", () => {
+      const torrentData = parseTorrent(fs.readFileSync(tempTorrentPath));
+      fs.unlinkSync(tempTorrentPath);
+      console.log("Deleted temporary torrent");
+      const magnetUri = parseTorrent.toMagnetURI(torrentData);
+      resolve(magnetUri);
+    });
+  });
 }

@@ -24,10 +24,10 @@ const body = { id: 1, method: "web.connected", params: [] };
 //   })
 //   .catch(e => console.log(e));
 
-function download(magnet) {
+function download(link) {
   fetch("/api/torrent", {
     method: "POST",
-    body: JSON.stringify({ magnet })
+    body: JSON.stringify({ link })
   })
     .then(res => res.json())
     .then(() => {
