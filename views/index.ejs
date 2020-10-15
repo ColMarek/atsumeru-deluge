@@ -28,18 +28,16 @@
         <div class="feed-item">
           <img src="<%- item.detail.imageUrl %> " alt="" class="feed-image">
           <div class="feed-content">
-            <div class="feed-content-main">
-              <p class="feed-title"><%-item.title %></p>
-              <a href="<%- item.detail.siteUrl %>" target="_blank" class="feed-anime-title"><%- item.animeTitle %></a>
-            </div>
-            <div class="feed-content-side">
+            <div class="">
               <p class="feed-date"><%-item.formattedDate %></p>
+              <p class="feed-title"><%-item.title %></p>
+            </div>
+            <div class="feed-content-bottom">
+              <a href="<%- item.detail.siteUrl %>" target="_blank" class="feed-anime-title"><%- item.animeTitle %></a>
               <svg class="feed-item-download-button" onclick=<%= item.onClick %>>
                 <use href="#magnet-link" />
               </svg>
             </div>
-            <!-- <div class="feed-content-dl">
-            </div> -->
           </div>
         </div>
         <% }); %>
