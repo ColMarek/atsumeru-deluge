@@ -139,10 +139,10 @@ atomic-sleep@^1.0.0:
   resolved "https://registry.yarnpkg.com/atomic-sleep/-/atomic-sleep-1.0.0.tgz#eb85b77a601fc932cfe432c5acd364a9e2c9075b"
   integrity sha512-kNOjDqAh7px0XWNI+4QbzoiR/nTkHAWNud2uvnJquD1/x5a7EQZMJT0AczqK0Qn67oY/TTQ1LbUKajZpp3I9tQ==
 
-atsumeru-core@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/atsumeru-core/-/atsumeru-core-1.2.0.tgz#2e1c25a927465532a29db014822bcd7de9fb1a85"
-  integrity sha512-Gm7HUYfNdZyhOUqou+llcwfpTLTE5poLPP3YcZGPgr/Spv+jtC0CcZovKAd8HkMEPsNDh/QiPfCC35D6EfW6rQ==
+atsumeru-core@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/atsumeru-core/-/atsumeru-core-1.3.0.tgz#e4fde3f631df955b280a38b668bb87963acdedec"
+  integrity sha512-76SPqtOmB7BrQOUEgqrzqQ/iOl7qnaExVy0okKEY4IJjdJFkEzBYd2uZVEV8knwAMNdA5jqPe1msqPAaN/0k7A==
   dependencies:
     axios "^0.19.2"
     dayjs "^1.9.1"
