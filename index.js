@@ -12,8 +12,9 @@ const delugePassword = process.env.DELUGE_PASSWORD;
 const delugeAddress = process.env.DELUGE_ADDRESS;
 let cookie = "";
 
-const { AtsumeruCore } = require("atsumeru-core");
+const { AtsumeruCore, EraiSource } = require("atsumeru-core");
 const atsumeruCore = new AtsumeruCore(".");
+const source = new EraiSource()
 
 fastify.addHook("onRequest", (req, _reply, done) => {
   console.log(`${req.raw.method} ${req.raw.url}`);
@@ -33,7 +34,7 @@ fastify.register(require("fastify-static"), {
 });
 
 fastify.get("/", async (_req, reply) => {
-  let feed = await atsumeruCore.getFeedWithDetail();
+  let feed = await atsumeruCore.getFeed(source);
   feed = feed.map(f => ({
     ...f,
     formattedDate: dayjs.unix(f.date).fromNow(),
@@ -43,8 +44,7 @@ fastify.get("/", async (_req, reply) => {
 });
 
 fastify.get("/api/feed", async () => {
-  const feedDetail = await atsumeruCore.getFeedWithDetail();
-  return feedDetail;
+  return await atsumeruCore.getFeed(source);
 });
 
 fastify.post("/api/torrent", async request => {
