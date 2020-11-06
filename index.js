@@ -4,17 +4,15 @@ const path = require("path");
 const dayjs = require("dayjs");
 dayjs.extend(require("dayjs/plugin/relativeTime"));
 const axios = require("axios").default;
-const fs = require("fs");
-const parseTorrent = require("parse-torrent");
+const {AtsumeruCore, NyaaSource} = require("atsumeru-core");
 
 const port = process.env.PORT || 3000;
 const delugePassword = process.env.DELUGE_PASSWORD;
 const delugeAddress = process.env.DELUGE_ADDRESS;
 let cookie = "";
 
-const { AtsumeruCore, EraiSource } = require("atsumeru-core");
 const atsumeruCore = new AtsumeruCore(".");
-const source = new EraiSource()
+const source = new NyaaSource("https://nyaa.si/?page=rss&u=Erai-raws&q=1080")
 
 fastify.addHook("onRequest", (req, _reply, done) => {
   console.log(`${req.raw.method} ${req.raw.url}`);
