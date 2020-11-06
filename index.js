@@ -34,13 +34,17 @@ fastify.register(require("fastify-static"), {
 });
 
 fastify.get("/", async (_req, reply) => {
-  let feed = await atsumeruCore.getFeed(source);
-  feed = feed.map(f => ({
-    ...f,
-    formattedDate: dayjs.unix(f.date).fromNow(),
-    onClick: `download("${f.link}")`
-  }));
-  reply.view("index.ejs", { feed, delugeAddress });
+  try {
+    let feed = await atsumeruCore.getFeed(source);
+    feed = feed.map(f => ({
+      ...f,
+      formattedDate: dayjs.unix(f.date).fromNow(),
+      onClick: `download("${f.link}")`
+    }));
+    reply.view("index.ejs", {feed, delugeAddress});
+  } catch (e) {
+    return e
+  }
 });
 
 fastify.get("/api/feed", async () => {

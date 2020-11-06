@@ -9,7 +9,7 @@
     "start:dev": "nodemon index.js"
   },
   "dependencies": {
-    "atsumeru-core": "^2.0.2",
+    "atsumeru-core": "^2.1.0",
     "axios": "^0.19.2",
     "dayjs": "^1.9.1",
     "dotenv": "^8.2.0",
