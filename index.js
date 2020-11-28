@@ -4,7 +4,7 @@ const path = require("path");
 const dayjs = require("dayjs");
 dayjs.extend(require("dayjs/plugin/relativeTime"));
 const axios = require("axios").default;
-const {AtsumeruCore, NyaaSource} = require("atsumeru-core");
+const {AtsumeruCore, SubsPleaseSource} = require("atsumeru-core");
 
 const port = process.env.PORT || 3000;
 const delugePassword = process.env.DELUGE_PASSWORD;
@@ -12,7 +12,7 @@ const delugeAddress = process.env.DELUGE_ADDRESS;
 let cookie = "";
 
 const atsumeruCore = new AtsumeruCore(".");
-const source = new NyaaSource("https://nyaa.si/?page=rss&u=Erai-raws&q=1080")
+const source = new SubsPleaseSource()
 
 fastify.addHook("onRequest", (req, _reply, done) => {
   console.log(`${req.raw.method} ${req.raw.url}`);
